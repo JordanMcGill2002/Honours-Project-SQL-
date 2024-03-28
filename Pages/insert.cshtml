@@ -1,0 +1,49 @@
+@page
+@model Project.Pages.InsertFilm
+@using FilmEntities @* allows the data to be sent*@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+</head>
+<body>
+
+<h1>Insert Record</h1>
+<link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+    <form action="~/Insert" method="post">
+        @Html.AntiForgeryToken()
+        <p>Title: <input type="text" name="tbxTitle"></p>
+        <p>Genre: <select name="tbxGenre">
+                <option value="Horror">Horror</option>
+                <option value="Action">Action</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Musical">Musical</option>
+                <option value="Drama">Drama</option>
+            </select></p>
+        <p>Release Date: <input type="date" name="tbxRelease"></p>
+        <p>Age Rating: <select name="tbxAge">
+            <option value="U">U</option>
+            <option value="PG">PG</option>
+            <option value="12A">12A</option>
+            <option value="15">15</option>
+            <option value="18">18</option>
+            </select></p>
+
+       <p>Rating: <input type="number" name="tbxRating" min="0" max="10"></p>
+
+        <p>Actor ID: <input type="number" name="tbxActor" min="1" max="64"></p>
+        <p><input type="submit" value="Insert"></p>
+    </form>
+       
+
+
+</body>
+</html>

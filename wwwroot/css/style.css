@@ -1,0 +1,121 @@
+This is the css file for the html page
+.search-bar {
+  overflow: hidden;
+  background-color: #e9e9e9;
+  padding-left: 1000px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0569ff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 5px;
+}
+
+.btn:hover {
+  background-color: #0569ff;
+}
+
+.btn:active {
+  background-color: #0569ff;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.search-bar {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#select {
+
+  margin-left: 155px;
+}
+
+#Bulk_Buttons {
+  margin-bottom: 15px;
+  margin-left: 155px;
+}
+
+#Bulk_ButtonsUpdate {
+
+  margin-left: 145px;
+}
+
+#Bulk_ButtonsDelete {
+
+  margin-right: 500px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ccc;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#Search form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#select {
+  margin-right: 156px;
+  /* Adjust the value as needed */
+  width: 221px;
+}
+
+/* Select the header element and apply some styles */
+h1 {
+  background-color: #333; /* Dark gray background */
+  color: white; /* White text color */
+  font-size: 36px; /* Large font size */
+  padding: 20px; /* Some space around the text */
+  text-align: center; /* Center the text */
+}
+
+/* Select the table element and apply some styles */
+table {
+  border-collapse: collapse; /* Remove the gaps between the cells */
+  width: 80%; /* Set the table width to 80% of the parent element */
+  margin: 0 auto; /* Center the table horizontally */
+}
+
+/* Select the table cells and apply some styles */
+td, th {
+  border: 1px solid #ddd; /* Add a thin border around the cells */
+  padding: 10px; /* Add some space around the content */
+  text-align: left; /* Align the text to the left */
+}
+
+/* Select the table header cells and apply some styles */
+th {
+  background-color:#0569ff; /* Green background */
+  color: white; /* White text color */
+  text-transform: uppercase; /* Make the header texts uppercase */
+}
+
+* {
+  font-family: Arial, sans-serif; /* Use a sans-serif font as a fallback */
+}/* Add a black background color to the top navigation bar */
+
+   

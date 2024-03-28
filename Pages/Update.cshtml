@@ -1,0 +1,47 @@
+@page
+@model Project.Pages.UpdateFilm
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+</head>
+
+<body>
+    <h1>Update Record</h1>
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+
+    <form action="~/Update" method="post">
+    @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Film.FilmId">
+        <p>Title: <input type="text" name="tbxTitleUpdate" value="@Model.Film.Title"></p>
+        <<p>Genre: <select name="tbxGenreUpdate" value="@Model.Film.Genre">
+            <option value="Horror">Horror</option>
+                <option value="Action">Action</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Musical">Musical</option>
+                <option value="Drama">Drama</option>
+            </select></p>
+        <p>Release Date: <input type="date" name="tbxReleaseUpdate" value="@Model.Film.Release_Date"></p>
+        <p>Age Rating: <select name="tbxAgeUpdate"value="@Model.Film.Age_Rating">
+                <option value="U">U</option>
+                <option value="PG">PG</option>
+                <option value="12A">12A</option>
+                <option value="15">15</option>
+                <option value="18">18</option>
+            </select></p>
+        <p>Rating: <input type="number" name="tbxRatingUpdate" min="0" max="10"value="@Model.Film.Rating"></p>
+        <p>Actor ID: <input type="number" name="tbxActorUpdate" min="1" max="64"value="@Model.Film.ActorID"></p>
+        <p><input type="submit" value="Update"></p>
+    </form>
+    <tr>
+
+</body>
+
+</html>

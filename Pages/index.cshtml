@@ -1,0 +1,234 @@
+@page
+@model Project.Pages.ViewActors
+@using FilmEntities @* allows the data to be sent*@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Page</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")">
+</head>
+<style>
+    .search-bar {
+        overflow: hidden;
+        background-color: #e9e9e9;
+        padding-left: 1000px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0569ff;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        margin: 5px;
+    }
+
+    .btn:hover {
+        background-color: #0569ff;
+    }
+
+    .btn:active {
+        background-color: #0569ff;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+    .search-bar {
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    #select {
+
+        margin-left: 155px;
+    }
+
+    #Bulk_Buttons {
+        margin-bottom: 15px;
+        margin-left: 155px;
+    }
+
+    #Bulk_ButtonsUpdate {
+
+        margin-left: 145px;
+    }
+
+    #Bulk_ButtonsDelete {
+
+        margin-right: 500px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ccc;
+        padding: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #Search form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #select {
+        margin-right: 156px;
+        /* Adjust the value as needed */
+        width: 221px;
+    }
+
+    th {
+        background-color: #0569ff;
+        /* Green background */
+        color: white;
+        /* White text color */
+        text-transform: uppercase;
+        /* Make the header texts uppercase */
+    }
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    </style>
+
+<script>
+        function changeInputField(select) {
+            var value = select.value;
+            var textInput = document.getElementById('SearchQuery');
+            var selectInput = document.getElementById('Genre');
+
+            if (value === 'Genre') {
+                textInput.style.display = 'none';
+                selectInput.style.display = 'block';
+            } else {
+                textInput.style.display = 'block';
+                selectInput.style.display = 'none';
+            }
+        }
+    </script>
+<body>
+    <h1>@Model.Heading</h1>
+    <div class="header">
+        <form action="~/InsertBulk" method="Post">
+            @Html.AntiForgeryToken()
+            <label for="recordCount"></label><br>
+            <input type="text" id="recordCount" name="recordCount" placeholder="   Number of Inserts"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+            <input type="submit" value="Insert Records" class="btn">
+            @if (!String.IsNullOrEmpty(TempData["Message"] as string))
+            {
+                <script>
+                    alert('@TempData["Message"]');
+                </script>
+            }
+        </form>
+        <form action="~/UpdateBulk" method="Post">
+            @Html.AntiForgeryToken()
+            <label for="recordCount"></label><br>
+            <input type="text" id="recordCount" name="recordCount" placeholder="   Number of Updates"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+            <input type="submit" value="Update Records" class="btn">
+        </form>
+        <form action="~/DeleteBulk" method="Post">
+            @Html.AntiForgeryToken()
+            <label for="recordCount"></label><br>
+            <input type="text" id="recordCount" name="recordCount" placeholder="   Number of Deletes"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" required><br>
+            <input type="submit" value="Delete Records" class="btn" id="bulkButtons">
+        </form>
+
+    </div>
+    </div>
+    <br>
+    <br>
+    <div id="Search">
+        <form method="get">
+            <select name="SearchCriteria" class="search-bar" id="select" onchange="changeInputField(this)">
+                <option value="Title">Title</option>
+                <option value="Genre">Genre</option>
+                <option value="Rating">Rating</option>
+            </select>
+            <input type="text" name="SearchQuery" id="SearchQuery" placeholder="Search..." value="@Model.SearchQuery"
+                class="search-bar">
+            <select name="Genre" id="Genre" class="search-bar" style="display: none;">
+                <option value="">Select Genre</option>
+                <option value="Horror">Horror</option>
+                <option value="Action">Action</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Romance">Romance</option>
+                <option value="Musical">Musical</option>
+                <option value="Drama">Drama</option>
+               
+            </select>
+            <input type="submit" value="Search" class="btn Insert" id="btn_submit">
+        </form>
+    </div>
+<br>
+    <div id="Insert_div">
+        <a href="~/Insert" class="btn">Insert A New Record</a>
+    </div>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Age Rating</th>
+            <th>Critic Rating</th>
+            <th>Lead Actor Forename</th>
+            <th>Lead Actor Surname</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+        @foreach (FilmActor filmActor in Model.FilmActor)
+        {
+            <tr>
+                <td>@filmActor.Title</td>
+                <td>@filmActor.Genre</td>
+                <td>@filmActor.Release</td>
+                <td>@filmActor.Age</td>
+                <td>@filmActor.Rating</td>
+                <td>@filmActor.FName</td>
+                <td>@filmActor.SName</td>
+                <td>
+                    <div id="Insert_div">
+                        <form action="~/Delete" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="hndFilmID" value="@filmActor.FilmId">
+                            <input type="submit" value="Delete" class="btn"
+                                onclick="return confirm('Are you sure you want to delete this record?');">
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div id="Insert_div">
+                        <A href="Update?id=@filmActor.FilmId" class="btn">Update</A>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+
+</html>
